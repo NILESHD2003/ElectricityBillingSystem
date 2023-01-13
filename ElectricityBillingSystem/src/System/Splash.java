@@ -20,7 +20,7 @@ public class Splash extends JWindow implements Runnable {
 		w.setVisible(true);
 		
 		//Use your folder image location in string to see the output
-		String str="src/icon/elect.jpg";
+		String str="ElectricityBillingSystem/src/icon/elect.jpg";
 		
 
 		JLabel label=new JLabel(new ImageIcon(str));
