@@ -9,13 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.sql.ResultSet;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class CalculateBill extends JFrame implements ActionListener{
 
@@ -48,6 +44,15 @@ public class CalculateBill extends JFrame implements ActionListener{
         
         
       //My-SQl code is here
+        try {
+            Connector c  = new Connector();
+            ResultSet rs = c.s.executeQuery("select * from customer");
+            while(rs.next()) {
+                meternumber.add(rs.getString("meter_no"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         
         
         meternumber.setBounds(240, 80, 200, 20);
@@ -71,18 +76,31 @@ public class CalculateBill extends JFrame implements ActionListener{
         labeladdress.setBounds(240, 160, 200, 20);
         p.add(labeladdress);
 //-------------------------------------------------------------------------------------------------------------------
-        
-        
-        
+
       //My-SQl code is here
-        
-        
+        try {
+            Connector c = new Connector();
+            ResultSet rs = c.s.executeQuery("select * from customer where meter_no = '"+meternumber.getSelectedItem()+"'");
+            while(rs.next()) {
+                lblname.setText(rs.getString("name"));
+                labeladdress.setText(rs.getString("address"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 //-------------------------------------------------------------------------------------------------------------------
         meternumber.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent ie) {
-            	
-            	//My-SQl code is here
-            	
+                try {
+                    Connector c = new Connector();
+                    ResultSet rs = c.s.executeQuery("select * from customer where meter_no = '"+meternumber.getSelectedItem()+"'");
+                    while(rs.next()) {
+                        lblname.setText(rs.getString("name"));
+                        labeladdress.setText(rs.getString("address"));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 //-------------------------------------------------------------------------------------------------------------------
@@ -148,9 +166,43 @@ public class CalculateBill extends JFrame implements ActionListener{
 //-------------------------------------------------------------------------------------------------------------------
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == next) {
-            
             	//My-SQl code is here
-            	
+            String meter = meternumber.getSelectedItem();
+            String units = tfunits.getText();
+            String month = cmonth.getSelectedItem();
+
+            int totalbill = 0;
+            int unit_consumed = Integer.parseInt(units);
+
+            String query = "select * from tax";
+
+            try {
+                Connector c = new Connector();
+                ResultSet rs = c.s.executeQuery(query);
+
+                while(rs.next()) {
+                    totalbill += unit_consumed * Integer.parseInt(rs.getString("cost_per_unit"));
+                    totalbill += Integer.parseInt(rs.getString("meter_rent"));
+                    totalbill += Integer.parseInt(rs.getString("service_charge"));
+                    totalbill += Integer.parseInt(rs.getString("service_tax"));
+                    totalbill += Integer.parseInt(rs.getString("swacch_bharat_cess"));
+                    totalbill += Integer.parseInt(rs.getString("fixed_tax"));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            String query2 = "insert into bill values('"+meter+"', '"+month+"', '"+units+"', '"+totalbill+"', 'Not Paid')";
+
+            try {
+                Connector c  =  new Connector();
+                c.s.executeUpdate(query2);
+
+                JOptionPane.showMessageDialog(null, "Customer Bill Updated Successfully");
+                setVisible(false);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else {
             setVisible(false);
         }

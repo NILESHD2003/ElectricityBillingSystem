@@ -4,6 +4,9 @@ import java.awt.Choice;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import net.proteanit.sql.DbUtils;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,7 +20,7 @@ public class DepositDetails extends JFrame implements ActionListener{
     JTable table;
     JButton search, print;
     
-    DepositDetails(){
+    DepositDetails() throws SQLException {
         super("Deposit Details");
         
         setSize(700, 700);
@@ -35,8 +38,16 @@ public class DepositDetails extends JFrame implements ActionListener{
         meternumber.setBounds(180, 20, 150, 20);
         add(meternumber);
 //-------------------------------------------------------------------------------------------------------------------
-        
-      //My-SQl code is here
+
+        try {
+            Connector c  = new Connector();
+            ResultSet rs = c.s.executeQuery("select * from customer");
+            while(rs.next()) {
+                meternumber.add(rs.getString("meter_no"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         
 //-------------------------------------------------------------------------------------------------------------------
         JLabel lblmonth = new JLabel("Search By Month");
@@ -61,8 +72,15 @@ public class DepositDetails extends JFrame implements ActionListener{
 //-------------------------------------------------------------------------------------------------------------------
         
         table = new JTable();
-        
-      //My-SQl code is here
+
+        try {
+            Connector c = new Connector();
+            ResultSet rs = c.s.executeQuery("select * from bill");
+
+            table.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         
 //-------------------------------------------------------------------------------------------------------------------
         JScrollPane sp = new JScrollPane(table);
@@ -83,22 +101,29 @@ public class DepositDetails extends JFrame implements ActionListener{
         setVisible(true);
     }
 //-------------------------------------------------------------------------------------------------------------------
-    
+
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == search) {
-        	
-        	//My-SQl code is here
-        	
-        	
+            String query = "select * from bill where meter_no = '"+meternumber.getSelectedItem()+"' and month = '"+cmonth.getSelectedItem()+"'";
+
+            try {
+                Connector c = new Connector();
+                ResultSet rs = c.s.executeQuery(query);
+                table.setModel(DbUtils.resultSetToTableModel(rs));
+            } catch (Exception e) {
+
+            }
         } else  {
-        	
-        	//My-SQl code is here
-        	
+            try {
+                table.print();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 //-------------------------------------------------------------------------------------------------------------------
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         new DepositDetails();
     }
 }

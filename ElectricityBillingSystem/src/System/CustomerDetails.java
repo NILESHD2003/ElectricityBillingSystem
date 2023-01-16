@@ -1,8 +1,11 @@
 package System;
 
+import net.proteanit.sql.DbUtils;
+
 import java.awt.Choice;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -25,6 +28,14 @@ public class CustomerDetails extends JFrame implements ActionListener{
         table = new JTable();
         
       //My-SQl code is here
+        try {
+            Connector c = new Connector();
+            ResultSet rs = c.s.executeQuery("select * from customer");
+
+            table.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         
 //-------------------------------------------------------------------------------------------------------------------
         JScrollPane sp = new JScrollPane(table);
@@ -41,6 +52,11 @@ public class CustomerDetails extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
     	
     	//My-SQl code is here
+        try {
+            table.print();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     	
     }
 //-------------------------------------------------------------------------------------------------------------------

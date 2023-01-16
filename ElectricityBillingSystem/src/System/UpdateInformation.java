@@ -5,12 +5,9 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class UpdateInformation extends JFrame implements ActionListener{
 
@@ -19,7 +16,7 @@ public class UpdateInformation extends JFrame implements ActionListener{
     String meter;
     JLabel name;
     
-    UpdateInformation() {
+    UpdateInformation(String meter) {
    
         setBounds(300, 150, 1050, 450);
         getContentPane().setBackground(Color.WHITE);
@@ -93,11 +90,21 @@ public class UpdateInformation extends JFrame implements ActionListener{
         tfphone.setBounds(230, 310, 200, 20);
         add(tfphone);
 //-------------------------------------------------------------------------------------------------------------------
-        
-        
-      //My-SQl code is here
-        
-        
+        try {
+            Connector c = new Connector();
+            ResultSet rs = c.s.executeQuery("select * from customer where meter_no = '"+meter+"'");
+            while(rs.next()) {
+                name.setText(rs.getString("name"));
+                tfaddress.setText(rs.getString("address"));
+                tfcity.setText(rs.getString("city"));
+                tfstate.setText(rs.getString("state"));
+                tfemail.setText(rs.getString("email"));
+                tfphone.setText(rs.getString("phone"));
+                meternumber.setText(rs.getString("meter_no"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 //-------------------------------------------------------------------------------------------------------------------
         update = new JButton("Update");
         update.setBackground(Color.BLACK);
@@ -128,8 +135,22 @@ public class UpdateInformation extends JFrame implements ActionListener{
 //-------------------------------------------------------------------------------------------------------------------
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == update) {
-        	
         	//My-SQl code is here
+            String address = tfaddress.getText();
+            String city = tfcity.getText();
+            String state = tfstate.getText();
+            String email = tfemail.getText();
+            String phone = tfphone.getText();
+
+            try {
+                Connector c = new Connector();
+                c.s.executeUpdate("update customer set address = '"+address+"', city = '"+city+"', state = '"+state+"', email = '"+email+"', phone = '"+phone+"' where meter_no = '"+meter+"'");
+
+                JOptionPane.showMessageDialog(null, "User Information Updated Successfully");
+                setVisible(false);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         	
         } else {
             setVisible(false);
@@ -137,6 +158,6 @@ public class UpdateInformation extends JFrame implements ActionListener{
     }
 //-------------------------------------------------------------------------------------------------------------------
     public static void main(String[] args) {
-        new UpdateInformation();
+        new UpdateInformation("");
     }
 }

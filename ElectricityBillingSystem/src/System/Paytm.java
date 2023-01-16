@@ -12,7 +12,7 @@ public class Paytm extends JFrame implements ActionListener{
 
     String meter;
     JButton back;
-    Paytm() {
+    Paytm(String meter) {
         
         JEditorPane j = new JEditorPane();
         j.setEditable(false);
@@ -46,13 +46,11 @@ public class Paytm extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         setVisible(false);
 //-------------------------------------------------------------------------------------------------------------------
-        
-        //My-SQl code is here
-          
+        new PayBill(meter);
 //------------------------------------------------------------------------------------------------------------------- 
     }
     
     public static void main(String[] args) {
-        new Paytm();
+        new Paytm("");
     }
 }

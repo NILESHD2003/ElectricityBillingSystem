@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,7 +16,7 @@ public class ViewInformation extends JFrame implements ActionListener{
 
     JButton cancel;
     
-    ViewInformation() {
+    ViewInformation(String meter) {
         setBounds(350, 150, 850, 650);
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
@@ -89,8 +90,21 @@ public class ViewInformation extends JFrame implements ActionListener{
         phone.setBounds(650, 200, 100, 20);
         add(phone);
 //-------------------------------------------------------------------------------------------------------------------
-        
-      //My-SQl code is here
+        try {
+            Connector c = new Connector();
+            ResultSet rs = c.s.executeQuery("select * from customer where meter_no = '"+meter+"'");
+            while(rs.next()) {
+                name.setText(rs.getString("name"));
+                address.setText(rs.getString("address"));
+                city.setText(rs.getString("city"));
+                state.setText(rs.getString("state"));
+                email.setText(rs.getString("email"));
+                phone.setText(rs.getString("phone"));
+                meternumber.setText(rs.getString("meter_no"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         
 //-------------------------------------------------------------------------------------------------------------------
         cancel = new JButton("Cancel");
@@ -116,6 +130,6 @@ public class ViewInformation extends JFrame implements ActionListener{
     }
     
     public static void main(String[] args) {
-        new ViewInformation();
+        new ViewInformation("");
     }
 }

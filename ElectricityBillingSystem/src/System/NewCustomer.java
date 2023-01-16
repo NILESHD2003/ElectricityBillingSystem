@@ -8,12 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 
 public class NewCustomer extends JFrame implements ActionListener{
@@ -138,9 +133,32 @@ public class NewCustomer extends JFrame implements ActionListener{
     
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == next) {
-        	
         	//My-SQl code is here
-        	
+        	String name = tfname.getText();
+        	String meter =lblmeter.getText();
+        	String address = tfaddress.getText();
+        	String city = tfcity.getText();
+        	String state = tfstate.getText();
+        	String email = tfemail.getText();
+        	String phone = tfphone.getText();
+
+            String query1="insert into customer values('"+name+"','"+meter+"','"+address+"','"+city+"','"+state+"','"+email+"','"+phone+"')";
+            String query2="insert into login values('"+meter+"','','"+name+"','','')";
+
+            try
+            {
+                Connector c=new Connector();
+                c.s.executeUpdate(query1);
+                c.s.executeUpdate(query2);
+
+                JOptionPane.showMessageDialog(null,"Customer Details Added Successfully");
+                setVisible(false);
+                new MeterInfo(meter);
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
         }
         else {
 			setVisible(false);
@@ -150,5 +168,4 @@ public class NewCustomer extends JFrame implements ActionListener{
     public static void main(String[] args) {
         new NewCustomer();
     }
-
 }

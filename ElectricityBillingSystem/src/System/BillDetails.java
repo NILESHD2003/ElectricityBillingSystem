@@ -1,6 +1,9 @@
 package System;
 
+import net.proteanit.sql.DbUtils;
+
 import java.awt.Color;
+import java.sql.ResultSet;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -8,7 +11,7 @@ import javax.swing.JTable;
 
 public class BillDetails extends JFrame{
 
-    BillDetails() {
+    BillDetails(String meter) {
    
     	super("BillDetails");
         setSize(700, 650);
@@ -19,8 +22,15 @@ public class BillDetails extends JFrame{
         JTable table = new JTable();
         
 //-------------------------------------------------------------------------------------------------------------------
-        
-        //My-SQl code is here
+        try {
+            Connector c = new Connector();
+            String query = "select * from bill where meter_no = '"+meter+"'";
+            ResultSet rs = c.s.executeQuery(query);
+
+            table.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
           
 //------------------------------------------------------------------------------------------------------------------- 
         
@@ -32,6 +42,6 @@ public class BillDetails extends JFrame{
     }
 
     public static void main(String[] args) {
-        new BillDetails();
+        new BillDetails("");
     }
 }

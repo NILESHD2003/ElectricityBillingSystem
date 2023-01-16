@@ -1,6 +1,5 @@
 package System;
 
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -46,7 +45,6 @@ public class Splash extends JWindow implements Runnable {
         w.setVisible(true);
 	}
 
-	
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -64,12 +62,9 @@ public class Splash extends JWindow implements Runnable {
 		
 	}
 
-	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new Splash();
 
 	}
-
-
 }

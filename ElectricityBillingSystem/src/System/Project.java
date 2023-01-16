@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -21,13 +22,13 @@ import javax.swing.KeyStroke;
 
 public class Project extends JFrame implements ActionListener{
 
-
-    Project() {
+    String atype, meter;
+    Project(String atype, String meter) {
         
         //the below code will help us to maximize the width and height of the frame by default 
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         
-        //The code for Baground image of Main Frame
+        //The code for Background image of Main Frame
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/elect1.jpg"));
         Image i2 = i1.getImage().getScaledInstance(1550, 850, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
@@ -232,13 +233,49 @@ public class Project extends JFrame implements ActionListener{
     }
     
       public void actionPerformed(ActionEvent ae) {
-
-    	//My-SQl code is here
-    	  
+          String msg = ae.getActionCommand();
+          if (msg.equals("New Customer")) {
+              new NewCustomer();
+          } else if (msg.equals("Customer Details")) {
+              new CustomerDetails();
+          }
+          else if (msg.equals("Deposit Details")) {
+              try {
+                  new DepositDetails();
+              } catch (SQLException e) {
+                  throw new RuntimeException(e);
+              }
+          } else if (msg.equals("Calculate Bill")) {
+              new CalculateBill();
+          } else if (msg.equals("View Information")) {
+              new ViewInformation(meter);
+          } else if (msg.equals("Update Information")) {
+              new UpdateInformation(meter);
+          } else if (msg.equals("Bill Details")) {
+              new BillDetails(meter);
+          } else if (msg.equals("Notepad")) {
+              try {
+                  Runtime.getRuntime().exec("notepad.exe");
+              } catch (Exception e) {
+                  e.printStackTrace();
+              }
+          } else if (msg.equals("Calculator")) {
+              try {
+                  Runtime.getRuntime().exec("calc.exe");
+              } catch (Exception e) {
+                  e.printStackTrace();
+              }
+          } else if (msg.equals("Exit")) {
+              setVisible(false);
+              new Login();
+          } else if (msg.equals("Pay Bill")) {
+              new PayBill(meter);
+          } else if (msg.equals("Generate Bill")) {
+              new GenerateBill(meter);
+          }
       }
 
     public static void main(String[] args) {
-        new Project();
+        new Project("","");
     }
-
 }

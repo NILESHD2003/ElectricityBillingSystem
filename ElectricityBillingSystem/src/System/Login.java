@@ -5,12 +5,9 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class Login extends JFrame implements ActionListener{
 
@@ -92,25 +89,42 @@ public class Login extends JFrame implements ActionListener{
         setLocation(400, 200);
         setVisible(true);
     }
-    
+
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == login) {
-        	
-        	//My-SQl code is here
-        	
+            String susername = username.getText();
+            String spassword = password.getText();
+            String user = logginin.getSelectedItem();
+
+            try {
+                Connector c = new Connector();
+                String query = "select * from login where username = '"+susername+"' and password = '"+spassword+"' and user = '"+user+"'";
+
+                ResultSet rs = c.s.executeQuery(query);
+
+                if (rs.next()) {
+                    String meter = rs.getString("meter_no");
+                    setVisible(false);
+                    new Project(user, meter);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid Login");
+                    username.setText("");
+                    password.setText("");
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else if (ae.getSource() == cancel) {
             setVisible(false);
         } else if (ae.getSource() == signup) {
             setVisible(false);
-            
+
             new Signup();
         }
     }
-    
 
-    
     public static void main(String[] args) {
         new Login();
     }
-
 }

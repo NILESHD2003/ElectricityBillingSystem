@@ -8,12 +8,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class MeterInfo extends JFrame implements ActionListener{
 
@@ -24,7 +19,7 @@ public class MeterInfo extends JFrame implements ActionListener{
     String meternumber;
     
     MeterInfo(String meternumber) {
-        
+        this.meternumber=meternumber;
         setSize(700, 500);
         setLocation(400, 200);
         
@@ -145,9 +140,29 @@ public class MeterInfo extends JFrame implements ActionListener{
     
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == next) {
-            
         	//My-SQl code is here
-        	
+
+            String meter =meternumber;
+            String location = meterlocation.getSelectedItem();
+            String type = metertype.getSelectedItem();
+            String code = phasecode.getSelectedItem();
+            String typebill = billtype.getSelectedItem();
+            String days = "30";
+
+            String query="insert into meter_info values('"+meter+"','"+location+"','"+type+"','"+code+"','"+typebill+"','"+days+"')";
+
+            try
+            {
+                Connector c=new Connector();
+                c.s.executeUpdate(query);
+
+                JOptionPane.showMessageDialog(null,"Meter Information Added Successfully");
+                setVisible(false);
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
         } 
     else {
             setVisible(false);
