@@ -12,7 +12,10 @@ public class Connector {
     {
         try
         {
+            ///for nilesh
             c=DriverManager.getConnection("jdbc:mysql://localhost:3306/ebs","root","Nilesh");
+            //for karan
+//            c=DriverManager.getConnection("jdbc:mysql://localhost:3306/ebs","root","karan");
             s=c.createStatement();
         }
         catch (Exception e)
