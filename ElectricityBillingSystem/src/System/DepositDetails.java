@@ -25,6 +25,7 @@ public class DepositDetails extends JFrame implements ActionListener{
         
         setSize(700, 700);
         setLocation(400, 100);
+        setResizable(false);
         
         setLayout(null);
         getContentPane().setBackground(Color.WHITE);

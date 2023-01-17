@@ -19,6 +19,7 @@ public class ViewInformation extends JFrame implements ActionListener{
     ViewInformation(String meter) {
         setBounds(350, 150, 850, 650);
         getContentPane().setBackground(Color.WHITE);
+        setResizable(false);
         setLayout(null);
 //-------------------------------------------------------------------------------------------------------------------
         

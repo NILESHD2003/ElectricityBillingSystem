@@ -23,6 +23,7 @@ public class CustomerDetails extends JFrame implements ActionListener{
         
         setSize(1200, 650);
         setLocation(200, 150);
+        setResizable(false);
 //-------------------------------------------------------------------------------------------------------------------
         
         table = new JTable();

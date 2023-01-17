@@ -23,8 +23,11 @@ public class PayBill extends JFrame implements ActionListener {
 
     PayBill(String meter) {
 
+        this.meter = meter;
+
         setLayout(null);
         setBounds(300, 150, 900, 600);
+        setResizable(false);
 
         JLabel heading = new JLabel("Electicity Bill");
         heading.setFont(new Font("Tahoma", Font.BOLD, 24));

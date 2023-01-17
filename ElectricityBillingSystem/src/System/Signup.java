@@ -20,6 +20,7 @@ public class Signup extends JFrame implements ActionListener{
 
         setBounds(450, 150, 700, 400);
         getContentPane().setBackground(Color.WHITE);
+        setResizable(false);
         setLayout(null);
 
         //With the help of JPanel we are giving border to sign up frame and adding all the related materials in that panel
