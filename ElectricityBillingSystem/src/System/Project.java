@@ -34,7 +34,7 @@ public class Project extends JFrame implements ActionListener{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //The code for Background image of Main Frame
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/elect1.jpg"));
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("iconv2/powergridimg.jpg"));
         Image i2 = i1.getImage().getScaledInstance(1550, 850, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image = new JLabel(i3);
@@ -211,10 +211,10 @@ public class Project extends JFrame implements ActionListener{
         mexit.setForeground(Color.RED);
         
         
-        JMenuItem exit = new JMenuItem("Exit");
+        JMenuItem exit = new JMenuItem("Logout");
         exit.setFont(new Font("monospaced", Font.PLAIN, 12));
         exit.setBackground(Color.WHITE);
-        ImageIcon icon12 = new ImageIcon(ClassLoader.getSystemResource("icon/icon11.png"));
+        ImageIcon icon12 = new ImageIcon(ClassLoader.getSystemResource("iconv2/exitcross.png"));
         Image image12 = icon12.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
         exit.setIcon(new ImageIcon(image12));
         exit.setMnemonic('W');
@@ -274,7 +274,7 @@ public class Project extends JFrame implements ActionListener{
               } catch (Exception e) {
                   e.printStackTrace();
               }
-          } else if (msg.equals("Exit")) {
+          } else if (msg.equals("Logout")) {
               setVisible(false);
               new Login();
           } else if (msg.equals("Pay Bill")) {

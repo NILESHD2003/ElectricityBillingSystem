@@ -145,11 +145,11 @@ public class Signup extends JFrame implements ActionListener{
         panel.add(back);
 
         //Decorative Image on frame
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/signupImage.png"));
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("iconv2/hanginglightpng.png"));
         Image i2 = i1.getImage().getScaledInstance(250, 250, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image = new JLabel(i3);
-        image.setBounds(415, 30, 250, 250);
+        image.setBounds(415, 30, 280, 250);
         panel.add(image);
 
         setVisible(true);
