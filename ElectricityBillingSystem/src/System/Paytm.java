@@ -48,7 +48,7 @@ public class Paytm extends JFrame implements ActionListener{
         setVisible(false);
 //-------------------------------------------------------------------------------------------------------------------
         JOptionPane.showMessageDialog(null,"Payment Done Successfully..!","Payment Status", JOptionPane.INFORMATION_MESSAGE);
-        new PayBill(meter);
+//        new PayBill(meter);
 //------------------------------------------------------------------------------------------------------------------- 
     }
     

@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Analytics{
-
+    String c_units="0";
     Analytics(){
         JFrame frame = new JFrame();
         frame.setTitle("Analytics");
@@ -189,8 +189,9 @@ public class Analytics{
         frame.add(bar12);
 
         JLabel total = new JLabel("Total Unit Consumed :");
-        total.setBounds(20, 480, 250, 50);
+        total.setBounds(20, 480, 500, 50);
         total.setFont(new Font("Thoma", Font.PLAIN, 25));
+        total.setText("Total Unit Consumed :"+c_units+" Units");
         frame.add(total);
 
         frame.setVisible(true);

@@ -93,7 +93,7 @@ public class MeterInfo extends JFrame implements ActionListener{
         
         billtype = new Choice();
         billtype.add("Normal");
-        billtype.add("Industial");
+        billtype.add("Industrial");
         billtype.setBounds(240, 240, 200, 20);
         p.add(billtype);
 //-------------------------------------------------------------------------------------------------------------------
