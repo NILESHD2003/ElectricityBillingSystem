@@ -21,6 +21,7 @@ public class Login extends JFrame implements ActionListener{
         
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
+        setResizable(false);
         
         //User name
         JLabel lblusername = new JLabel("Username");
@@ -116,7 +117,7 @@ public class Login extends JFrame implements ActionListener{
                 e.printStackTrace();
             }
         } else if (ae.getSource() == cancel) {
-            setVisible(false);
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         } else if (ae.getSource() == signup) {
             setVisible(false);
 

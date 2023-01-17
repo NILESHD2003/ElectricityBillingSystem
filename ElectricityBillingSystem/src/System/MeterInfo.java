@@ -22,6 +22,7 @@ public class MeterInfo extends JFrame implements ActionListener{
         this.meternumber=meternumber;
         setSize(700, 500);
         setLocation(400, 200);
+        setResizable(false);
         
         JPanel p = new JPanel();
         p.setLayout(null);

@@ -1,12 +1,10 @@
 package System;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JEditorPane;
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 
 public class Paytm extends JFrame implements ActionListener{
 
@@ -16,6 +14,7 @@ public class Paytm extends JFrame implements ActionListener{
         
         JEditorPane j = new JEditorPane();
         j.setEditable(false);
+        setResizable(false);
         
 //-------------------------------------------------------------------------------------------------------------------
         
@@ -33,6 +32,8 @@ public class Paytm extends JFrame implements ActionListener{
         add(pane);
         
         back = new JButton("Back");
+        back.setBackground(Color.blue);
+        back.setForeground(Color.white);
         back.setBounds(640, 20, 80, 30);
         back.addActionListener(this);
         j.add(back);
@@ -46,6 +47,7 @@ public class Paytm extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         setVisible(false);
 //-------------------------------------------------------------------------------------------------------------------
+        JOptionPane.showMessageDialog(null,"Payment Done Successfully..!","Payment Status", JOptionPane.INFORMATION_MESSAGE);
         new PayBill(meter);
 //------------------------------------------------------------------------------------------------------------------- 
     }

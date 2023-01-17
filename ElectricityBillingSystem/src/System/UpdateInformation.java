@@ -17,9 +17,12 @@ public class UpdateInformation extends JFrame implements ActionListener{
     JLabel name;
     
     UpdateInformation(String meter) {
+
+        this.meter = meter;
    
         setBounds(300, 150, 1050, 450);
         getContentPane().setBackground(Color.WHITE);
+        setResizable(false);
         setLayout(null);
         
         JLabel heading = new JLabel("UPDATE CUSTOMER INFORMATION");

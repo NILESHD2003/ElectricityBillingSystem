@@ -20,6 +20,7 @@ public class NewCustomer extends JFrame implements ActionListener{
     NewCustomer() {
         setSize(700, 500);
         setLocation(400, 200);
+        setResizable(false);
         
         JPanel p = new JPanel();
         p.setLayout(null);

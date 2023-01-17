@@ -24,9 +24,14 @@ public class Project extends JFrame implements ActionListener{
 
     String atype, meter;
     Project(String atype, String meter) {
+
+        this.atype = atype;
+        this.meter = meter;
         
         //the below code will help us to maximize the width and height of the frame by default 
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //The code for Background image of Main Frame
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/elect1.jpg"));
@@ -220,10 +225,14 @@ public class Project extends JFrame implements ActionListener{
 //-------------------------------------------------------------------------------------------------------------------        
     
     //Adding all menus to menubar    
-        mb.add(master);
-        mb.add(info);
-        mb.add(user);
-        mb.add(report);
+        if (atype.equals("Admin")) {
+            mb.add(master);
+        } else {
+            mb.add(info);
+            mb.add(user);
+            mb.add(report);
+        }
+
         mb.add(utility);
         mb.add(mexit);
         
