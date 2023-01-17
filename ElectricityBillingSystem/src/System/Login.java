@@ -49,6 +49,8 @@ public class Login extends JFrame implements ActionListener{
         //Drop down for logging in 
         //Choice is also like a JComboBox
         logginin = new Choice();
+        logginin.setBackground(Color.WHITE);
+        logginin.setForeground(new Color(5, 169, 66));
         logginin.add("Admin");
         logginin.add("Customer");
         logginin.setBounds(400, 100, 150, 20);
@@ -63,7 +65,7 @@ public class Login extends JFrame implements ActionListener{
         add(login);
         
         //Cancel Button
-        ImageIcon i3 = new ImageIcon(ClassLoader.getSystemResource("icon/cancel.jpg"));
+        ImageIcon i3 = new ImageIcon(ClassLoader.getSystemResource("iconv2/exitcross.png"));
         Image i4 = i3.getImage().getScaledInstance(16, 16, Image.SCALE_DEFAULT);
         cancel = new JButton("Cancel", new ImageIcon(i4));
         cancel.setBounds(450, 160, 100, 20);
@@ -79,7 +81,7 @@ public class Login extends JFrame implements ActionListener{
         add(signup);
         
         //Side decoration image
-        ImageIcon i7 = new ImageIcon(ClassLoader.getSystemResource("icon/second.jpg"));
+        ImageIcon i7 = new ImageIcon(ClassLoader.getSystemResource("iconv2/signin.png"));
         Image i8 = i7.getImage().getScaledInstance(250, 250, Image.SCALE_DEFAULT);
         ImageIcon i9 = new ImageIcon(i8);
         JLabel image = new JLabel(i9);
@@ -117,7 +119,8 @@ public class Login extends JFrame implements ActionListener{
                 e.printStackTrace();
             }
         } else if (ae.getSource() == cancel) {
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setVisible(false);
+
         } else if (ae.getSource() == signup) {
             setVisible(false);
 
