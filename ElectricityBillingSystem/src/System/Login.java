@@ -1,8 +1,6 @@
 package System;
 
-import java.awt.Choice;
-import java.awt.Color;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -12,7 +10,8 @@ import javax.swing.*;
 public class Login extends JFrame implements ActionListener{
 
     JButton login, cancel, signup;
-    JTextField username, password;
+    JTextField username;
+    JPasswordField password;
     Choice logginin;
     Login() {
     	//super is title of your page which should be the first line of your program
@@ -30,15 +29,18 @@ public class Login extends JFrame implements ActionListener{
         
         username = new JTextField();
         username.setBounds(400, 20, 150, 20);
+        username.setFont(new Font("Calibre", Font.PLAIN, 14));
         add(username);
         
         //Password
         JLabel lblpassword = new JLabel("Password");
-        lblpassword.setBounds(300, 60, 100, 20);
+        lblpassword.setBounds(300, 60, 100, 18);
         add(lblpassword);
         
-        password = new JTextField();
+        password = new JPasswordField();
         password.setBounds(400, 60, 150, 20);
+        password.setFont(new Font("Tahoma", Font.BOLD, 20));
+        password.setEchoChar('*');
         add(password);
         
         //Logging in as
